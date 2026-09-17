@@ -109,6 +109,14 @@ structure ConvertWord : CONVERT_WORD =
       fun bytesToWord64SL s = bytesToWord64L (Bytesubstring.string s)
 
 
+      fun safe conv x = SOME (conv x) handle ConvertWord => NONE
+
+      val bytesToWord64B' = safe bytesToWord64B
+      val bytesToWord64L' = safe bytesToWord64L
+      val bytesToWord32B' = safe bytesToWord32B
+      val bytesToWord32L' = safe bytesToWord32L
+
+
       (* This stuff depends on the size of Word/LargeWord. *)
 
       val wordToWord8 = word32ToWord8

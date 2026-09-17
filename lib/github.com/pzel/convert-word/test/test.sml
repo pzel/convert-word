@@ -4,7 +4,7 @@ local
   val w64 = Word64.fromLargeInt o Time.toMilliseconds o Time.now
   val id = fn x => x
 in
-val tests =  [
+val oldApiTests =  [
   It "does word32 conversion to and from bytestring" (
     fn()=>
        let
@@ -51,7 +51,37 @@ val tests =  [
        in ConvertWord.bytesToWord64B b0 == 0wx1230123FEFEBABA
        end)
 ]
+
+val newApiTests = [
+  It "converts bytestring to word32 option (success)"(
+    fn()=>
+       let
+         val b0 = Option.valOf (Bytestring.fromStringHex "fefebaba")
+       in ConvertWord.bytesToWord32B' b0 == SOME 0wxFEFEBABA
+       end)
+ ,It "converts bytestring to word32 option (failure)"(
+    fn()=>
+       let
+         val b0 = Option.valOf (Bytestring.fromStringHex "32")
+       in ConvertWord.bytesToWord32B' b0 == NONE
+       end)
+
+ ,It "converts bytestring to word64 option (success)"(
+    fn()=>
+       let
+         val b0 = Option.valOf (Bytestring.fromStringHex "01230123fefebaba")
+       in ConvertWord.bytesToWord64B' b0 == SOME 0wx1230123FEFEBABA
+       end)
+ ,It "converts bytestring to word64 option (failure)"(
+    fn()=>
+       let
+         val b0 = Option.valOf (Bytestring.fromStringHex "32")
+       in ConvertWord.bytesToWord64B' b0 == NONE
+       end)
+
+
+]
 end
 
 fun main () =
-	runTestsWith tests (CommandLine.arguments())
+	runTestsWith (oldApiTests @ newApiTests) (CommandLine.arguments())
