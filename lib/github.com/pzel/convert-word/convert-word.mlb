@@ -1,0 +1,5 @@
+$(SML_LIB)/basis/basis.mlb
+$(SMLPKG)/github.com/pzel/bytestring/bytestring.mlb
+$(SMLPKG)/github.com/pzel/packword64/packword64.mlb
+convert-word.sig
+convert-word.sml
