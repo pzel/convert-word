@@ -52,11 +52,6 @@ structure ConvertWord : CONVERT_WORD =
          end
 
 
-
-
-
-
-
       fun word64ToBytesB w =
          let
             val a = Word8Array.array (8, 0w0)
@@ -73,6 +68,8 @@ structure ConvertWord : CONVERT_WORD =
             Bytestring.fromWord8Vector (Word8Array.vector a)
          end
 
+      (* The name is wrong *)
+      fun word16ToBytesB w = Bytestring.substring(word32ToBytesB w, 2, 2)
 
       exception ConvertWord
 

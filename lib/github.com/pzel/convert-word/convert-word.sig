@@ -49,6 +49,9 @@ signature CONVERT_WORD =
       val word32ToBytesL : word32 -> Bytestring.string
       val word32ToIntInf : word32 -> IntInf.int
 
+      val word16ToBytesB : word -> Bytestring.string
+      (* val wordToBytesL : word -> Bytestring.string*)
+
       val word64ToWord : word64 -> word
       val word64ToWordX : word64 -> word
       val word64ToWordLg : word64 -> wordlg
@@ -90,6 +93,7 @@ signature CONVERT_WORD =
       val bytesToWord32L' : Bytestring.string -> word32 option
       val bytesToWord64B' : Bytestring.string -> word64 option
       val bytesToWord64L' : Bytestring.string -> word64 option
+
 
 
    end

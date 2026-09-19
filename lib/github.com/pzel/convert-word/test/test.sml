@@ -79,6 +79,14 @@ val newApiTests = [
        in ConvertWord.bytesToWord64B' b0 == NONE
        end)
 
+ ,It "does word32 conversion to a 16-bit bytestring (lower bits)" (
+    fn()=>
+       let
+         val op == = Assert.eq id
+         val w0 = 0wxabcd5678
+         val hex = Bytestring.toStringHex
+       in hex (ConvertWord.word16ToBytesB w0) == "5678"
+       end)
 
 ]
 end
